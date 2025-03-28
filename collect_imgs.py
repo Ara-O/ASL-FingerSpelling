@@ -28,18 +28,18 @@ for j in range(number_of_classes):
     done = False
     while True:
         ret, frame = cap.read()         
-        # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        # results = hands.process(frame_rgb)
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = hands.process(frame_rgb)
 
-        # if results.multi_hand_landmarks:
-        #     for hand_landmarks in results.multi_hand_landmarks:
-        #         mp_drawing.draw_landmarks(
-        #             frame,
-        #             hand_landmarks,
-        #             mp_hands.HAND_CONNECTIONS,
-        #             mp_drawing_styles.get_default_hand_landmarks_style(),
-        #             mp_drawing_styles.get_default_hand_connections_style()
-        #         )
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                mp_drawing.draw_landmarks(
+                    frame,
+                    hand_landmarks,
+                    mp_hands.HAND_CONNECTIONS,
+                    mp_drawing_styles.get_default_hand_landmarks_style(),
+                    mp_drawing_styles.get_default_hand_connections_style()
+                )
         cv2.putText(frame, 'Ready? Press "Q" ! :)', (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 255, 0), 3,
                     cv2.LINE_AA)
         cv2.imshow('frame', frame)
