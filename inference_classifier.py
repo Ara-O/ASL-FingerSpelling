@@ -15,8 +15,8 @@ model_dict = pickle.load(open('model.p', 'rb'))
 model = model_dict['model']
 
 labels_dict = {
-0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'K', 10: 'L', 11: 'M', 12: 'N', 13: 'O', 14: 'P', 15: 'Q', 16: 'R', 17: 'S', 18: 'T', 19: 'U', 20: 'V', 21: 'W', 22: 'X', 23: 'Y', 24: 'J', 25: 'Z'
-
+0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'K', 10: 'L', 11: 'M', 12: 'N', 13: 'O', 14: 'P', 15: 'Q', 16: 'R', 17: 'S', 18: 'T', 19: 'U', 20: 'V', 21: 'W', 22: 'X', 23: 'Y', 24: 'J', 25: 'Z',
+'I Love You': "I Love You"
 #0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'J', 10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S', 19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y', 25: 'Z'
 }
 
@@ -47,9 +47,17 @@ while True:
             
                     data_aux.append(y)
         
-        prediction = model.predict([np.asarray(data_aux)])
+        prediction = model.predict([np.asarray(data_aux[:42])])
         predicted_character = labels_dict[int(prediction[0])]
         print(predicted_character)
+        cv2.putText(frame, f"Prediction: {predicted_character}", 
+                (50, 50),  
+                cv2.FONT_HERSHEY_COMPLEX_SMALL,  
+                1,  # Font scale
+                (255, 255, 255),  # Color (Green)
+                1,  # Thickness
+                cv2.LINE_AA)  # Anti-aliasing
+
     cv2.imshow('frame', frame),
     cv2.waitKey(25)
 
