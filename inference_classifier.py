@@ -48,13 +48,16 @@ while True:
                     data_aux.append(y)
         
         prediction = model.predict([np.asarray(data_aux[:42])])
-        predicted_character = labels_dict[int(prediction[0])]
+        if prediction[0] == "I Love You":
+            predicted_character = "I Love You"
+        else:
+            predicted_character = labels_dict[int(prediction[0])]
         print(predicted_character)
         cv2.putText(frame, f"Prediction: {predicted_character}", 
                 (50, 50),  
                 cv2.FONT_HERSHEY_COMPLEX_SMALL,  
                 1,  # Font scale
-                (255, 255, 255),  # Color (Green)
+                (255, 255, 0),
                 1,  # Thickness
                 cv2.LINE_AA)  # Anti-aliasing
 
